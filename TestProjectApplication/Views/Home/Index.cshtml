@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="datalist">
+
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+
+    GetPostList();
+    function GetPostList() {
+        var urlpath = '@Url.Action("GetAllPostList", "Home")';
+            $.ajax({
+                data: { },
+                url: urlpath,
+                type: "POST",
+                async: true,
+                success: function (data) {
+                    $(".datalist").empty();
+                    $(".datalist").html(data);
+                    $(".dataposttable").DataTable();
+
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+    }
+</script>

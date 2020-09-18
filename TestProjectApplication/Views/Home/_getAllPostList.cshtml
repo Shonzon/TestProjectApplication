@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TestProjectApplication.Models.PostModel>
+<style>
+    th{
+        color:blue;
+    }
+   .fa-arrow-down{
+       color:red
+   }
+   .fa-arrow-up{
+       color:green;
+   }
+</style>
+<div class="box">
+    <table class="table table-striped dataposttable table-bordered" width="100%">
+        <thead>
+            <tr>
+                <td>Post</td>
+                <td>Post BY</td>
+                <td>Post Created</td>
+                <td>Comments</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var posts in Model)
+            {
+                <tr>
+                    <th>@posts.PostName</th>
+                    <th>@posts.PostBy</th>
+                    <th>@posts.PostDate</th>
+                    <th>@posts.CommentList.Count Comments</th>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td style="display: none;"></td>
+                    <td style="display: none;"></td>
+                </tr>
+                    foreach (var comments in posts.CommentList)
+                   {
+                     <tr>
+                        <td>@comments.CommentName</td>
+                        <td>@comments.UserName</td>
+                        <td>@comments.CommentDate</td>
+                         <td>
+                            <i class="fa fa-arrow-up ">@comments.CommentLike</i>
+                            <i class="fa fa-arrow-down ">@comments.CommentDislike</i>
+                         </td>
+                     </tr>
+                   }
+                
+            }
+        </tbody>
+    </table>
+</div>
